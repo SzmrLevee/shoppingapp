@@ -1,0 +1,316 @@
+body {
+    background: #34495e;
+  }
+  
+  * {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  }
+  
+  .main-section {
+    background: transparent;
+    max-width: 500px;
+    width: 90%;
+    height: 500px;
+    margin: 30px auto;
+    border-radius: 10px;
+  }
+  
+  .add-section {
+    width: 100%;
+    background: #fff;
+    margin: 0px auto;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .add-section input {
+    display: block;
+    width: 95%;
+    height: 40px;
+    margin: 10px auto;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 0px 5px;
+  }
+  
+  .add-section button {
+    display: block;
+    width: 95%;
+    height: 40px;
+    margin: 0px auto;
+    border: none;
+    outline: none;
+    background: #0088FF;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-section button:hover {
+    box-shadow: 0 2px 2px 0 #ccc, 0 2px 3px 0 #ccc;
+    opacity: 0.7;
+  }
+  
+  .add-section button span {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+  }
+  
+  #errorMes {
+    display: block;
+    background: #f2dede;
+    width: 95%;
+    margin: 0px auto;
+    color: rgb(139, 19, 19);
+    padding: 10px;
+    height: 35px;
+  }
+  
+  .show-todo-section {
+    width: 100%;
+    background: #fff;
+    margin: 30px auto;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .todo-item {
+    width: 95%;
+    margin: 10px auto;
+    padding: 20px 10px;
+    box-shadow: 0 4px 8px 0 #ccc, 0 6px 20px 0 #ccc;
+    border-radius: 5px;
+  }
+  
+  .todo-item h2 {
+    display: inline-block;
+    padding: 5px 0px;
+    font-size: 17px;
+    font-family: sans-serif;
+    color: #555;
+  }
+  
+  .todo-item small {
+    display: block;
+    width: 100%;
+    padding: 5px 0px;
+    color: #888;
+    padding-left: 30px;
+    font-size: 14px;
+    font-family: sans-serif;
+  }
+  
+  .remove-to-do {
+    display: block;
+    float: right;
+    width: 20px;
+    height: 20px;
+    font-family: sans-serif;
+    color: rgb(139, 97, 93);
+    text-decoration: none;
+    text-align: right;
+    padding: 0px 5px 8px 0px;
+    border-radius: 50%;
+    transition: background 1s;
+    cursor: pointer;
+  }
+  
+  .remove-to-do:hover {
+    background: rgb(139, 97, 93);
+    color: #fff;
+  }
+  
+  .checked {
+    color: #999 !important;
+    text-decoration: line-through;
+  }
+  
+  .todo-item input {
+    margin: 0px 5px;
+  }
+  
+  .empty {
+    font-family: sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: #cccc;
+  }
+
+  .container {
+    background: #fff;
+    width: 450px;
+    padding: 1.5rem;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+form {
+    margin: 0 2rem;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 1.3rem;
+    margin-bottom: 0.4rem;
+}
+
+input {
+    color: inherit;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #757575;
+    padding-left: 1.5rem;
+    font-size: 15px;
+}
+
+.input-group {
+    padding: 1% 0;
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    color: black;
+}
+
+input:focus {
+    background-color: transparent;
+    outline: transparent;
+    border-bottom: 2px solid hsl(327, 90%, 28%);
+}
+
+input::placeholder {
+    color: transparent;
+}
+
+label {
+    color: #757575;
+    position: relative;
+    left: 1.2em;
+    top: -1.3em;
+    cursor: auto;
+    transition: 0.3s ease all;
+}
+
+input:focus~label,
+input:not(:placeholder-shown)~label {
+    top: -3em;
+    color: hsl(327, 90%, 28%);
+    font-size: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(125, 125, 235);
+}
+
+.btn {
+  display: inline-block;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  text-align: center;
+  color: #fff;
+  background-color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  border-color: #004494;
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.btn:active {
+  background-color: #004494;
+  border-color: #003366;
+  transform: translateY(0);
+}
+
+.btn.admin {
+  background-color: #28a745;
+}
+
+.btn.admin:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn.logout {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn.logout:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logout-button {
+  text-align: center;
+}
+
+.logout-button form {
+  margin: 0;
+  padding: 0;
+}
+
+.i {
+    color: rgb(125, 125, 235);
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 2px solid #dfe9f5;
+    margin: 0 15px;
+    transition: 1s;
+}
+
+.i:hover {
+    background: #07001f;
+    font-size: 1.6rem;
+    border: 2px solid rgb(125, 125, 235);
+}
+
+.links {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 4rem;
+    margin-top: 0.9rem;
+    font-weight: bold;
+}
+
+button {
+    color: rgb(125, 125, 235);
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: bold;
+}
