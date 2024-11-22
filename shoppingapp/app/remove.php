@@ -4,8 +4,6 @@ ini_set('display_errors', 1);
 
 include('./connect.php');
 
-session_start();
-
 if (!isset($_SESSION['id']) || !isset($_POST['id'])) {
     echo '0';
     exit();

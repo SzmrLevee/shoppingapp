@@ -4,8 +4,6 @@ ini_set('display_errors', 1);
 
 include('./app/connect.php');
 
-session_start();
-
 if (!isset($_SESSION['id'])) {
     header("Location: ../index.php");
     exit();
@@ -99,7 +97,6 @@ $isAdmin = ($role == 4);
         </div>
     </div>
 
-    <script src="./js/jquery-3.2.1.min.js"></script>
     <script>
         $(document).ready(function(){
 
