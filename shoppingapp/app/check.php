@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
 }
 
 if (isset($_POST['id'])) {
-    $todoId = $_POST['id'];
+    $todoId = intval($_POST['id']);
 
     $stmt = $conn->prepare("SELECT checked FROM todos WHERE id = ?");
     $stmt->execute([$todoId]);

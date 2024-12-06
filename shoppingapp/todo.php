@@ -70,21 +70,21 @@ $isAdmin = ($role == 4);
 
             <?php while($todo = $todosQuery->fetch(PDO::FETCH_ASSOC)) { ?>
                 <div class="todo-item">
-                    <span id="<?php echo $todo['id']; ?>" class="remove-to-do">x</span>
-                    <?php if($todo['checked']){ ?> 
+                    <div class="todo-checkbox">
                         <input type="checkbox"
-                               class="check-box"
-                               data-todo-id ="<?php echo $todo['id']; ?>"
-                               checked />
-                        <h2 class="checked"><?php echo $todo['title'] ?></h2>
-                    <?php } else { ?>
-                        <input type="checkbox"
-                               data-todo-id ="<?php echo $todo['id']; ?>"
-                               class="check-box" />
-                        <h2><?php echo $todo['title'] ?></h2>
-                    <?php } ?>
-                    <br>
-                    <small>Létrehozva: <?php echo $todo['created_at']; ?> és létrehozta: <?php echo $todo['firstName']; ?></small>
+                            class="check-box"
+                            data-todo-id="<?php echo $todo['id']; ?>"
+                            <?php echo $todo['checked'] ? 'checked' : ''; ?> />
+                    </div>
+                    <div class="todo-content">
+                        <label class="todo-label <?php echo $todo['checked'] ? 'checked' : ''; ?>">
+                            <?php echo htmlspecialchars($todo['title']); ?>
+                        </label>
+                        <small>Létrehozva: <?php echo $todo['created_at']; ?> és létrehozta: <?php echo htmlspecialchars($todo['firstName']); ?></small>
+                    </div>
+                    <div class="todo-remove">
+                        <span id="<?php echo $todo['id']; ?>" class="remove-to-do">x</span>
+                    </div>
                 </div>
             <?php } ?>
         </div>
@@ -98,55 +98,62 @@ $isAdmin = ($role == 4);
     </div>
 
     <script>
-        $(document).ready(function(){
+    document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.check-box').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            const id = this.dataset.todoId;
+            const label = this.closest('.todo-item').querySelector('.todo-label');
+            const isChecked = this.checked;
 
-            $('.remove-to-do').click(function(){
-                const id = $(this).attr('id');
-                const element = $(this).parent();
-
-                if (confirm('Biztosan ki akarod törölni?')) {
-                    $.post("./app/remove.php", 
-                          {
-                              id: id
-                          },
-                          (data)  => {
-                             if(data == '1'){
-                                 element.fadeOut(600, function() {
-                                     $(this).remove();
-                                 });
-                             } else {
-                                 alert('Sikertelen törlés...');
-                             }
-                          }
-                    );
+            if (isChecked) {
+                label.classList.add('checked');
+            } else {
+                label.classList.remove('checked');
+            }
+            fetch('./app/check.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `id=${id}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'error') {
+                    alert('Hiba történt az állapot frissítése során.');
                 }
-            });
-
-            $(".check-box").click(function(){
-                const id = $(this).attr('data-todo-id');
-                const checkbox = $(this);
-                const h2 = $(this).next();
-
-                $.post('./app/check.php', 
-                      {
-                          id: id
-                      },
-                      (data) => {
-                          if(data !== 'error'){
-                              if(data === '1'){
-                                  checkbox.prop('checked', true);
-                                  h2.addClass('checked');
-                              } else {
-                                  checkbox.prop('checked', false);
-                                  h2.removeClass('checked');
-                              }
-                          } else {
-                              alert('Sikertelen státusz változtatás...');
-                          }
-                      }
-                );
-            });
+            })
+            .catch(err => console.error('Hiba:', err));
         });
-    </script>
+    });
+
+    document.querySelectorAll('.remove-to-do').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const id = this.id;
+            const todoItem = this.closest('.todo-item');
+
+            if (confirm('Biztosan törölni szeretnéd?')) {
+                fetch('./app/remove.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `id=${id}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === '1') {
+                        todoItem.remove();
+                    } else {
+                        alert('Hiba történt a törlés során.');
+                    }
+                })
+                .catch(err => console.error('Hiba:', err));
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
