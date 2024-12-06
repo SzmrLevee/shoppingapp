@@ -20,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_PO
                 $hashedPasswordFromDb = $user['password'];
                 $role = $user['role'];
                 if (sha1($password) === $hashedPasswordFromDb) {
-                    session_start();
                     $_SESSION['id'] = $userId;
                     $_SESSION['role'] = $role;
 
